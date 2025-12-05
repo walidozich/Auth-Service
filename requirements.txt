@@ -4,7 +4,9 @@ sqlalchemy[asyncio]
 asyncpg
 psycopg2-binary
 python-jose[cryptography]
-passlib[bcrypt]
+passlib==1.7.4
+bcrypt==3.2.2
 python-multipart
 pydantic-settings
 alembic
+email-validator
