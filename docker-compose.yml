@@ -1,24 +1,25 @@
-version: "3.9"
 
 services:
   db:
     image: postgres:16-alpine
+    container_name: auth-postgres
+    restart: unless-stopped
     environment:
-      POSTGRES_USER: auth_user
-      POSTGRES_PASSWORD: auth_password
-      POSTGRES_DB: auth_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: authdb
     ports:
-      - "5432:5432"
+      - "5433:5432"
     volumes:
       - db_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["executable", "arg"]
-      interval: 1m30s
-      timeout: 30s
-      retries: 5
-      start_period: 30s
+      test: ["CMD-SHELL", "pg_isready -U auth_user -d auth_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
 
-api:
+  api:
     build:
       context: .
       dockerfile: Dockerfile
@@ -26,10 +27,10 @@ api:
     restart: unless-stopped
     ports:
       - "8000:8000"
-    environment:
-      DATABASE_URL: postgresql+asyncpg://auth_user:auth_password@db:5432/auth_db
-      env_file:
+    env_file:
       - .env
+    environment:
+      DATABASE_URL: postgresql+asyncpg://postgres:postgres@db:5432/authdb
     depends_on:
       db:
         condition: service_healthy
@@ -39,4 +40,4 @@ api:
 
 volumes:
   db_data:
-      name: db_data
+    name: db_data

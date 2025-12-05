@@ -1,0 +1,148 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+.env/
+.venv/
+venv/
+ENV/
+env/
+venv-*/
+venv.bak/
+
+# PyInstaller
+#  Usually these files are written by a python script from a template
+#  before PyInstaller builds the exe, so as to inject date/other infos.
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+.pytest_cache/
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+
+# Translations
+*.mo
+*.pot
+
+# Django stuff (not typical for FastAPI but harmless)
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# FastAPI / general env and secrets
+.env
+.env.*
+*.env
+secrets.json
+instance/
+instance/*
+
+# Alembic (keep migrations/versions committed; ignore env/local configs)
+alembic.ini.local
+alembic/env.py.bak
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# IDEs and editors
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+*.tmproj
+*.project
+*.classpath
+*.settings/
+*.metadata/
+*.iml
+
+# macOS, Windows
+.DS_Store
+Thumbs.db
+
+# Docker
+**/docker-compose.override.yml
+docker-compose.override.yml
+*.dockerignore
+
+# Logs and debug
+logs/
+*.log
+
+# Static / build outputs
+build/
+dist/
+staticfiles/
+media/
+*.pot
+
+# Python type checkers / caches
+.mypy_cache/
+.pyre/
+.pytype/
+.ruff_cache/
+
+# Coverage reports
+coverage.xml
+htmlcov/
+
+# Secrets and keys
+*.pem
+*.key
+*.crt
+
+# Misc
+*.pickle
+*.cache
+*.swp
+*.bak
+*~ 
+
+# Node if frontend present
+node_modules/
+npm-debug.log
+yarn-error.log
+pnpm-lock.yaml

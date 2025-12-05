@@ -4,7 +4,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.core.database import get_db
 from app.core.security import create_access_token
 from app.crud.user import authenticate_user, create_user, get_user_by_email,get_user_by_username
-from app.dependencies import get_current_user
+from app.dependencies import get_current_user, require_admin_user
 from app.models.user import User
 from app.schemas.user import UserCreate, UserOut, Token
 from datetime import timedelta
@@ -32,11 +32,15 @@ async def login(form_data: OAuth2PasswordRequestForm = Depends(), db: AsyncSessi
             headers={"WWW-Authenticate": "Bearer"},
         )
     access_token_expires = timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
-    access_token = create_access_token(data={"sub": user.email}, expires_delta=access_token_expires)
+    access_token = create_access_token(data={"sub": user.email, "role": user.role.value}, expires_delta=access_token_expires)
     return {"access_token": access_token, "token_type": "bearer"}
 
 @router.get("/me", response_model=UserOut)
 async def read_users_me(current_user: User = Depends(get_current_user)):
+    return current_user
+
+@router.get("/admin/me", response_model=UserOut)
+async def read_admin_me(current_user: User = Depends(require_admin_user)):
     return current_user
 
 @router.get("/get_all_users", response_model=list[UserOut])
